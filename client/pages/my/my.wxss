@@ -1,0 +1,22 @@
+/* pages/result/result.wxss */
+page {
+  display: block;
+  min-height: 100%;
+  background-color:#F0F0F0;
+}
+
+.cat {
+  background-color: white;
+  
+}
+
+.cat.head {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 2rpx solid #e5e5e5;
+  padding: 20rpx ;
+}
+ 
+.cat.content {
+  background-color:#F0F0F0
+}

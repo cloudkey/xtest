@@ -1,0 +1,25 @@
+<view style="width:100%;">
+  <view style="padding:80rpx 10rpx 10rpx 10rpx;text-align:center">
+    <image src="index.jpg" mode="aspectFit"></image>
+  </view>
+  <!--  <view style="padding:60rpx 40rpx 10rpx 40rpx;color:#7b7b7b">
+    <text>{{note}}</text>
+  </view>
+  <view style="text-align:right;padding:1rpx 40rpx 40rpx 40rpx;color:#7b7b7b">
+    <text>——{{author}}</text>
+  </view>
+-->
+  <view style="padding:80rpx 10rpx 10rpx 10rpx;text-align:center;overflow:auto;">
+  <scroll-view scroll-x="true" style="padding:0rpx 20rpx 0rpx 20rpx;height:180rpx;width:100%;white-space:nowrap;overflow:auto;" bindscrolltolower="scrollToLower">
+    <view wx:for="{{users}}" style="display:inline-block;" >
+      <image style="width:110rpx;height:90rpx;display:block;" src="{{item.head}}"></image>
+      <text style="display:block;font-size:30rpx;text-align:center;">{{item.name}}</text>
+      <text style="display:block;font-size:30rpx;text-align:center;">{{typeDesc[item.xtype-1]}}</text>
+    </view>
+  </scroll-view>
+  </view>
+
+  <view style="padding:40rpx;">
+    <button bindtap='startTest' type="primary">开始测试吧</button>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+/**index.wxss**/
+.checkbox {
+  display: flex;
+  align-items: left;
+  vertical-align: center;
+  }

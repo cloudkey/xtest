@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<view class="container">
+  <view style="padding:40rpx 40rpx 0rpx 40rpx;text-align:center;color:blue">
+    <text>请在比较符合自己的项上打钩</text>
+  </view>
+    <view style="padding:0rpx 40rpx 40rpx 40rpx;text-align:center;color:#aaaaff">
+    <text>(填的越全测的越准哦^_^)</text>
+  </view>
+  <form bindsubmit='formSubmit' name='nation'>
+    <scroll-view scroll-y style="height:800rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+      <checkbox-group name='sel' bindchange="checkboxChange">
+        <label class="checkbox" style="border-bottom: 2rpx solid #e5e5e5;height:100rpx;align-items:center;" wx:for="{{items}}">
+          <checkbox value="{{item.value}}" checked="{{item.checked}}" />{{item.content}}
+        </label>
+      </checkbox-group>
+      <view>
+      </view>
+    </scroll-view>
+    <view style="padding:20rpx 0rpx 0rpx 0rpx">
+      <button formType="submit" type="primary">提交</button>
+    </view>
+  </form>
+</view>

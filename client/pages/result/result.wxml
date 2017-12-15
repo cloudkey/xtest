@@ -1,0 +1,42 @@
+<view>
+  <view style="text-align:center;">
+    <view style="font-size:100rpx;">
+      <text>{{typeDesc[xtype-1]}}</text>
+    </view>
+    <view>
+      <text>（{{xtype}}号人格）</text>
+    </view>
+  </view>
+  <template name="catList">
+    <view bindtap='unfold' class="cat" id="{{id}}">
+      <view class="cat.head" style="color:#{{cr}};">
+        <view style="min-width:80%">
+          <view>
+            <text>{{head}}</text>
+          </view>
+        </view>
+        <view style="text-align:right;min-width:20%">
+          <text>︾</text>
+        </view>
+      </view>
+      <view wx:if="{{open}}" class="cat.content">
+        <view wx:if="{{self}}">
+          <text>{{detail1}}</text>
+        </view>
+        <view wx:if="{{!self}}">
+          <text style="font-weight: bold">喜欢的地方：</text>
+          <text>{{detail1}}</text>
+        </view>
+        <view wx:if="{{!self}}">
+          <text style="font-weight: bold">反感的地方：</text>
+          <text>{{detail2}}</text>
+        </view>
+      </view>
+    </view>
+  </template>
+
+  <block wx:for="{{cats}}">
+    <template is="catList" data="{{...item}}" />
+  </block>
+
+</view>

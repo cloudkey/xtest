@@ -1,0 +1,5 @@
+<view style="vertical-align:center;padding:400rpx 40rpx 40rpx 40rpx;text-align:center;">
+  <view style="text-align:center;">
+    <text>{{errmsg}}</text>
+  </view>
+</view>
