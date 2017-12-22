@@ -19,7 +19,8 @@ Page({
     users:[
     ],
     usersPage: 0,
-    loaddingUsers: false
+    scrollLeft: 0,
+    loaddingUsers: false,
   },
   onLaunch: function () {
     wx.setStorageSync('logs', 'login')
@@ -59,6 +60,9 @@ Page({
           url: '../err/err',
         })
       },
+      complete: function(e){
+        wx.hideLoading()
+      }
     })
   },
   onShareAppMessage: function (options) {
@@ -87,9 +91,16 @@ Page({
      });
    }
    */
-  scrollToLower:function(){
+  loadUsers:function(init){
+    console.log("init: ", init)
+    if(init == undefined){
+      init = false
+    }
+    if(init){
+      this.data.usersPage = 0
+    }
     if (this.data.loaddingUsers){
-      console.log("loadding users in process")
+      console.log("loadding users in process: ", this.data.usersPage)
       return
     }
     console.log("begin request")
@@ -114,6 +125,9 @@ Page({
         }
         that.data.usersPage++
         var nusers = that.data.users
+        if(init){
+          nusers = []
+        }
         for(var i = 0; i < res.data.length; i++){
           var item = res.data[i]
           console.log("item:",item)
@@ -130,12 +144,22 @@ Page({
         that.setData({
           users: nusers
         })
+        if(init){
+          console.log("set scroll left 0")
+          that.setData({
+            scrollLeft: 0
+            
+          })
+        }
       },
       fail:function(e){
         console.log("get result failed:",e)
         that.data.loaddingUsers = false
       }
     })
+  },
+  scrollToLower:function(){
+    this.loadUsers(false)
   },
   onLoad: function () {
     var idx = Date.now() % this.data.notes.length
@@ -147,4 +171,14 @@ Page({
     }),
     this.scrollToLower()
   },
+  onPullDownRefresh: function(){
+    wx.showNavigationBarLoading()
+
+    setTimeout(function(){
+      wx.hideNavigationBarLoading()
+      wx.stopPullDownRefresh()
+    }, 1000)
+
+    this.loadUsers(true)
+  }
 })

@@ -10,7 +10,7 @@
   </view>
 -->
   <view style="padding:80rpx 10rpx 10rpx 10rpx;text-align:center;overflow:auto;">
-  <scroll-view scroll-x="true" style="padding:0rpx 20rpx 0rpx 20rpx;height:180rpx;width:100%;white-space:nowrap;overflow:auto;" bindscrolltolower="scrollToLower">
+  <scroll-view scroll-left="{{scrollLeft}}" scroll-x="true" style="padding:0rpx 20rpx 0rpx 20rpx;height:180rpx;width:100%;white-space:nowrap;overflow:auto;" bindscrolltolower="scrollToLower">
     <view wx:for="{{users}}" style="display:inline-block;" >
       <image style="width:110rpx;height:90rpx;display:block;" src="{{item.head}}"></image>
       <text style="display:block;font-size:30rpx;text-align:center;">{{item.name}}</text>
