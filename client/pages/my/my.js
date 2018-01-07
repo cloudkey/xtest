@@ -50,7 +50,7 @@ Page({
         ncats.push({
           id: idx++,
           open: false,
-          head: i + "号人眼中的你",
+          head: i + "号" + '(' + this.data.typeDesc[i - 1] + ')' +"人眼中的你",
           key: i + '-' + xtype,
           self: false,
           detail1: "",

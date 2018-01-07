@@ -20,7 +20,7 @@ class TestHTTPHandler(BaseHTTPRequestHandler):
             page = int(parse_qs(up.query)['page'][0])
             db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="234", db="xtest",charset="utf8")
             cursor = db.cursor()
-            cursor.execute("select name,xtype,head from t_result order by utime desc limit %d,%d"%(page*10,(page+1)*10))
+            cursor.execute("select name,xtype,head from t_result order by utime desc limit %d,%d"%(page*10,10))
             results = cursor.fetchall()  
             templateStr = json.dumps(results, ensure_ascii=False, encoding='UTF-8')
             db.close()

@@ -19,8 +19,10 @@ Page({
     users:[
     ],
     usersPage: 0,
+    pageEnd : false,
     scrollLeft: 0,
     loaddingUsers: false,
+    lastScrollLowerTime: 0
   },
   onLaunch: function () {
     wx.setStorageSync('logs', 'login')
@@ -97,7 +99,8 @@ Page({
       init = false
     }
     if(init){
-      this.data.usersPage = 0
+      this.data.usersPage = 0,
+      this.data.pageEnd = false
     }
     if (this.data.loaddingUsers){
       console.log("loadding users in process: ", this.data.usersPage)
@@ -107,6 +110,7 @@ Page({
     var curPage = this.data.usersPage
     var that = this
     this.data.loaddingUsers = true
+    console.log("curPage:",curPage)
     wx.request({
       url: app.url('get_result/'),
       data: {
@@ -124,6 +128,9 @@ Page({
           return
         }
         that.data.usersPage++
+        if (res.data.length < 10){
+          that.data.pageEnd = true
+        }
         var nusers = that.data.users
         if(init){
           nusers = []
@@ -132,8 +139,12 @@ Page({
           var item = res.data[i]
           console.log("item:",item)
           var shortName = item[0]
-          if(shortName.length>=6){
-            shortName = shortName.substr(0,4)+'~'
+          var shortLen = 5
+          if (escape(shortName).indexOf("%u") != -1) {
+            shortLen = 3;
+          }
+          if (shortName.length > shortLen){
+            shortName = shortName.substr(0, shortLen-1)+'~'
           }
           nusers.push({
             name: shortName,
@@ -159,7 +170,15 @@ Page({
     })
   },
   scrollToLower:function(){
-    this.loadUsers(false)
+    var mTime = Date.now()
+    if(mTime - this.data.lastScrollLowerTime < 1000){
+      this.data.lastScrollLowerTime = mTime
+      return
+    }
+    this.data.lastScrollLowerTime = mTime
+    if(!this.data.pageEnd){
+      this.loadUsers(false)
+    }
   },
   onLoad: function () {
     var idx = Date.now() % this.data.notes.length
