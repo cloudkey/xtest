@@ -1,3 +1,4 @@
 create table t_items(id int auto_increment primary key, value int, content varchar(1000))charset=utf8;
 create table t_desc(id int auto_increment primary key, name varchar(32), descr varchar(4000), unique key(name))charset=utf8;
 create table t_result(id int auto_increment primary key, name varchar(32), xtype int, head varchar(1024),cnt int,ctime timestamp default current_timestamp,utime timestamp default current_timestamp on update current_timestamp,unique key(name))charset=utf8;
+create table t_comments(id int auto_increment primary key, name varchar(32), head varchar(1024),content varchar(2000), comment_time datetime, parent_id int, ctime timestamp default current_timestamp,utime timestamp default current_timestamp on update current_timestamp)charset=utf8;

@@ -1,0 +1,31 @@
+<view class="items" wx:for="{{items}}">
+  <view class="item">
+    <view class="head">
+      <image src="{{item.lz_icon}}"></image>
+      <label>{{item.lz_name}}</label>
+    </view>
+    <view class="body">
+      <view class="content">
+        <text>{{item.content}}</text>
+      </view>
+      <view class="bottom">
+        <text>{{item.date}}</text>
+      </view>
+      <view class="reply" wx:for="{{item.reply}}">
+        <label>{{item.name}}：</label>
+        <text>{{item.content}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="seperator"></view>
+</view>
+<form bindsubmit="sendComment">
+  <view class="comment">
+    <view class="input">
+      <input name="comment" value="{{cur_comment}}" show-confirm-bar="false" adjust-position="false" placeholder="评一下"></input>
+    </view>
+    <view class="send">
+      <button size="mini" formType="submit" type="primary">发送</button>
+    </view>
+  </view>
+</form>
